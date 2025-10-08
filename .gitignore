@@ -1,0 +1,66 @@
+# =========================
+# 🔧 Node / General
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# 🔒 Environment Variables
+# =========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# =========================
+# ⚙️ Build / Output Files
+# =========================
+dist/
+build/
+.cache/
+.temp/
+out/
+coverage/
+
+# =========================
+# 🧠 Backend
+# =========================
+Backend/node_modules/
+Backend/.env
+Backend/dist/
+Backend/uploads/
+Backend/logs/
+
+# =========================
+# 💻 Frontend
+# =========================
+Frontend/node_modules/
+Frontend/.env
+Frontend/build/
+Frontend/dist/
+Frontend/.next/
+Frontend/.cache/
+Frontend/.vscode/
+
+# =========================
+# 🧩 OS / Editor Files
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# 🧾 Misc
+# =========================
+*.log
+*.pid
+*.seed
+*.pid.lock
+package-lock.json
+yarn.lock
