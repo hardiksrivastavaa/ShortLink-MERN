@@ -12,11 +12,11 @@ export default function UrlForm() {
       return;
     }
     setLoading(true);
-    const response = await axios.post("http://localhost:3000/url", {
+    const response = await axios.post("https://url-shortner-mern-7hrn.onrender.com/url", {
       url: url.trim(),
     });
     const id = response.data?.id;
-    setShortUrl(`http://localhost:3000/url/${id}`);
+    setShortUrl(`https://url-shortner-mern-7hrn.onrender.com/url/${id}`); 
     setLoading(false);
   };
 

@@ -2,39 +2,39 @@ import Url from "../models/url.js";
 import { nanoid } from "nanoid";
 
 const handleGenerateNewShortURL = async (req, res) => {
-    const body = req.body;
+  const body = req.body;
 
-    try {
-        if (!body.url) return res.status(400).json({ error: "Url is required" });
+  try {
+    if (!body.url) return res.status(400).json({ error: "Url is required" });
 
-        let shortId = nanoid(8);
+    let shortId = nanoid(8);
 
-        await Url.create({
-            shortId: shortId,
-            redirectUrl: body.url,
-            visitHistory: [],
-        });
+    await Url.create({
+      shortId: shortId,
+      redirectUrl: body.url,
+      visitHistory: [],
+    });
 
-        return res.json({ id: shortId });
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: "Server error" });
-    }
+    return res.json({ id: shortId });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Server error" });
+  }
 };
 
 const handleRedirectToOriginalURL = async (req, res) => {
-    const { shortId } = req.params;
+  const { shortId } = req.params;
 
-    try {
-        const url = await Url.findOne({ shortId: shortId });
-        if (!url) return res.status(404).json({ error: "No URL found" });
-        url.visitHistory.push({ timestamps: Date.now() });
-        await url.save();
-        return res.redirect(url.redirectUrl);
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: "Server error" });
-    }
+  try {
+    const url = await Url.findOne({ shortId: shortId });
+    if (!url) return res.status(404).json({ error: "No URL found" });
+    url.visitHistory.push({ timestamps: Date.now() });
+    await url.save();
+    return res.redirect(url.redirectUrl);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Server error" });
+  }
 };
 
 // const handleAnalyticsForShortURL = async (req, res) => {
@@ -70,7 +70,8 @@ const handleAnalyticsForShortURL = async (req, res) => {
     let shortId;
     try {
       const parsed = new URL(shortUrl);
-      shortId = parsed.pathname.replace("/", "").trim();
+      // shortId = parsed.pathname.replace("/", "").trim();
+      shortId = parsed.pathname.split("/").pop().trim();
     } catch (err) {
       shortId = shortUrl.split("/").pop().trim();
     }
@@ -97,7 +98,17 @@ const handleAnalyticsForShortURL = async (req, res) => {
 };
 
 export {
-    handleGenerateNewShortURL,
-    handleRedirectToOriginalURL,
-    handleAnalyticsForShortURL,
+  handleGenerateNewShortURL,
+  handleRedirectToOriginalURL,
+  handleAnalyticsForShortURL,
 };
+
+
+
+
+
+
+
+
+
+
