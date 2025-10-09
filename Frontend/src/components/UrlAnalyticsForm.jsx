@@ -12,7 +12,7 @@ export default function UrlAnalyticsForm() {
       return;
     }
     setLoading(true);
-    const response = await axios.post(`https://url-shortner-mern-7hrn.onrender.com/analytics/`, {
+    const response = await axios.post(`https://url-shortner-mern-7hrn.onrender.com/url/analytics/`, {
       shortUrl: shortUrl.trim(),
     });
     const data = response.data;
