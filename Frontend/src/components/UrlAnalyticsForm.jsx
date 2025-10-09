@@ -12,9 +12,12 @@ export default function UrlAnalyticsForm() {
       return;
     }
     setLoading(true);
-    const response = await axios.post(`https://url-shortner-mern-7hrn.onrender.com/url/analytics/`, {
-      shortUrl: shortUrl.trim(),
-    });
+    const response = await axios.post(
+      `https://url-shortner-mern-7hrn.onrender.com/url/analytics/`,
+      {
+        shortUrl: shortUrl.trim(),
+      }
+    );
     const data = response.data;
     setHistory(data);
     setLoading(false);
@@ -75,13 +78,9 @@ export default function UrlAnalyticsForm() {
                     Visit #{index + 1}
                   </p>
                   <p className="text-gray-600 text-sm sm:text-base break-words">
-                    <span className="font-semibold">Visited Date:</span>{" "}
+                    <span className="font-semibold">Visited At:</span>{" "}
                     {visit["Visit Date"]}
                   </p>
-                  {/* <p className="text-gray-600 text-sm sm:text-base break-words">
-                    <span className="font-semibold">Visit ID:</span>{" "}
-                    {visit["Visit ID"]}
-                  </p> */}
                 </div>
               </div>
             ))}

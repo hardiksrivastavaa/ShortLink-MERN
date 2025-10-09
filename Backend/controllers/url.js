@@ -37,28 +37,6 @@ const handleRedirectToOriginalURL = async (req, res) => {
   }
 };
 
-// const handleAnalyticsForShortURL = async (req, res) => {
-//     const { shortId } = req.params;
-
-//     try {
-//         const url = await Url.findOne({ shortId });
-//         if (!url) return res.status(404).json({ error: "No URL found" });
-
-//         const formattedHistory = url.visitHistory.map((entry) => ({
-//             "Visit ID": entry._id,
-//             "Visit Date": new Date(entry.timestamps).toLocaleString(),
-//         }));
-
-//         return res.json({
-//             totalClicks: url.visitHistory.length,
-//             visitHistory: formattedHistory,
-//         });
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({ error: "Server error" });
-//     }
-// };
-
 const handleAnalyticsForShortURL = async (req, res) => {
   try {
     const { shortUrl } = req.body;
@@ -70,7 +48,6 @@ const handleAnalyticsForShortURL = async (req, res) => {
     let shortId;
     try {
       const parsed = new URL(shortUrl);
-      // shortId = parsed.pathname.replace("/", "").trim();
       shortId = parsed.pathname.split("/").pop().trim();
     } catch (err) {
       shortId = shortUrl.split("/").pop().trim();
@@ -102,12 +79,6 @@ export {
   handleRedirectToOriginalURL,
   handleAnalyticsForShortURL,
 };
-
-
-
-
-
-
 
 
 
