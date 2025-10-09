@@ -61,7 +61,7 @@ const handleRedirectToOriginalURL = async (req, res) => {
 
 const handleAnalyticsForShortURL = async (req, res) => {
   try {
-    const { shortUrl } = req.body; // user will always send shortened URL
+    const { shortUrl } = req.body;
 
     if (!shortUrl) {
       return res.status(400).json({ error: "Shortened URL is required" });
