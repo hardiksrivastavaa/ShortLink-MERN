@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const urlSchema = new mongoose.Schema(
     {
         shortId: {
@@ -10,6 +11,10 @@ const urlSchema = new mongoose.Schema(
         redirectUrl: {
             type: String,
             required: true,
+        },
+        owner: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
         },
         visitHistory: [
             {

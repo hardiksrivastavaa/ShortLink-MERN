@@ -3,7 +3,7 @@ import { nanoid } from "nanoid";
 
 const handleGenerateNewShortURL = async (req, res) => {
   const body = req.body;
-
+  
   try {
     if (!body.url) return res.status(400).json({ error: "Url is required" });
 
@@ -12,6 +12,7 @@ const handleGenerateNewShortURL = async (req, res) => {
     await Url.create({
       shortId: shortId,
       redirectUrl: body.url,
+      owner: body.userId,
       visitHistory: [],
     });
 
