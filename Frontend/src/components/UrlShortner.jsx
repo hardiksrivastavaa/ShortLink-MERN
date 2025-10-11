@@ -3,6 +3,7 @@ import axios from "axios";
 import { useAuth } from "../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { motion } from "framer-motion";
+import { url_Route } from "../utils/constant";
 
 const UrlShortener = () => {
   const [url, setUrl] = useState("");
@@ -11,7 +12,6 @@ const UrlShortener = () => {
   const [loading, setLoading] = useState(false);
 
   const normalizeUrl = (input) => {
-    // Auto-prepend https:// if user missed it
     if (!/^https?:\/\//i.test(input)) {
       return `https://${input}`;
     }
@@ -29,13 +29,13 @@ const UrlShortener = () => {
       const normalizedUrl = normalizeUrl(url);
       console.log(normalizedUrl);
       
-      const response = await axios.post("http://localhost:3000/url", {
+      const response = await axios.post(url_Route, {
         url: normalizedUrl,
         userId: user?.userId,
       });
 
       const id = response.data?.id;
-      const newShort = `http://localhost:3000/url/${id}`;
+      const newShort = `${url_Route}/${id}`;
       setShortUrl(newShort);
 
       toast.success("Short URL generated successfully!");

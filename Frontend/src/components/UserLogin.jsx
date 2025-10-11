@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { user_Route } from "../utils/constant";
 
 const UserLogin = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const UserLogin = () => {
     try {
       // ✅ Wrap axios request in toast.promise
       const response = await toast.promise(
-        axios.post("http://localhost:3000/user/login", {
+        axios.post(`${user_Route}/login`, {
           email: login.email,
           password: login.password,
         }),
@@ -47,7 +48,7 @@ const UserLogin = () => {
       loginUser(userData);
 
       setLogin({ email: "", password: "" });
-      setTimeout(() => navigate("/dashboard"), 800);
+      setTimeout(() => navigate("/dashboard"), 500);
     } catch (error) {
       console.error(error);
       if (error.response?.data?.error) {

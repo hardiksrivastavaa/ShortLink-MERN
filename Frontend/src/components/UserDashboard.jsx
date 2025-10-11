@@ -4,6 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Copy } from "lucide-react";
 import { toast } from "react-hot-toast";
+import { url_Route } from "../utils/constant";
 
 const UserDashboard = () => {
   const [urls, setUrls] = useState([]);
@@ -20,7 +21,7 @@ const UserDashboard = () => {
 
       try {
         const res = await axios.get(
-          `http://localhost:3000/user/dashboard/${user.userId}`
+          `${url_Route}/${user.userId}`
         );
         setUrls(res.data.urls || []);
       } catch (err) {
@@ -39,7 +40,6 @@ const UserDashboard = () => {
   };
 
   const handleCopy = (url) => {
-    // const shortUrl = `http://localhost:3000/url/${shortId}`;
     navigator.clipboard.writeText(url);
     toast.success("Copied to clipboard!");
   };
@@ -95,7 +95,7 @@ const UserDashboard = () => {
                 </thead>
                 <tbody>
                   {urls.map((url) => {
-                    const shortUrl = `http://localhost:3000/url/${url.shortId}`;
+                    const shortUrl = `${url_Route}/${url.shortId}`;
                     const originalUrl = url.redirectUrl;
                     
                     return (
@@ -147,7 +147,7 @@ const UserDashboard = () => {
             {/* Card View (for small screens) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:hidden mt-6">
               {urls.map((url) => {
-                const shortUrl = `https://url-shortner-mern-7hrn.onrender.com/url/${url.shortId}`;
+                const shortUrl = `${url_Route}/${url.shortId}`;
                 return (
                   <div
                     key={url._id}

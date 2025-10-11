@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { motion } from "framer-motion";
+import { url_Route } from "../utils/constant";
 
 const UrlAnalytics = () => {
   const [shortUrl, setShortUrl] = useState("");
@@ -17,7 +18,7 @@ const UrlAnalytics = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:3000/url/analytics/",
+        `${url_Route}/analytics/`,
         { shortUrl: shortUrl.trim() }
       );
       setHistory(response.data);

@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { user_Route } from "../utils/constant";
 
 const UserRegistration = () => {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const UserRegistration = () => {
     try {
       // ✅ Wrap axios POST call in toast.promise
       await toast.promise(
-        axios.post("http://localhost:3000/user/register", {
+        axios.post(`${user_Route}/register`, {
           username: register.username,
           email: register.email,
           password: register.password,
