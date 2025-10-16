@@ -4,7 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Copy } from "lucide-react";
 import { toast } from "react-hot-toast";
-import { url_Route } from "../utils/constant";
+import { url_Route, user_Route } from "../utils/constant";
 
 const UserDashboard = () => {
   const [urls, setUrls] = useState([]);
@@ -21,9 +21,11 @@ const UserDashboard = () => {
 
       try {
         const res = await axios.get(
-          `${url_Route}/${user.userId}`
+          `${user_Route}/dashboard/${user.userId}`
         );
         setUrls(res.data.urls || []);
+        console.log(res.data);
+        
       } catch (err) {
         console.error("Error fetching URLs:", err);
       } finally {
@@ -71,12 +73,9 @@ const UserDashboard = () => {
 
         {/* URLs List */}
         {urls.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20">
+          <div className="flex flex-col items-center justify-center py-5">
             <p className="text-gray-500 text-lg">
               You haven’t created any shortened URLs yet.
-            </p>
-            <p className="text-indigo-600 font-medium mt-2">
-              Start by shortening a URL from the home page!
             </p>
           </div>
         ) : (
